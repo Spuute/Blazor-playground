@@ -1,0 +1,57 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Api", "Api", "{3EB6C372-EDB6-4143-8C51-E7A90637395E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{A2A8B395-4D23-41BC-B28F-1A8B8BD0751E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{0B033572-B063-4B59-B9BD-FBC53BFD763E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{89CE3CEC-4921-464D-A1EB-D90E929BFD4E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{462F87EF-4FDB-4A65-A2A9-F311C491644E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Application\Application.csproj", "{869886F8-D8C2-401C-9283-0C8698471103}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{EFC1C8E0-4F09-4820-A82F-8D77FB0FDBA0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{35C7CE93-5E6A-4F30-A6DF-095869008CCC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blazor-playground-api", "Blazor-playground-api\Blazor-playground-api.csproj", "{B9976EC0-7478-4822-B8EC-73392AB5DF46}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blazor-playground-web", "Blazor-playground-web\Blazor-playground-web.csproj", "{91A55373-A1D8-4207-92EB-EB5713F1D6BD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{869886F8-D8C2-401C-9283-0C8698471103} = {A2A8B395-4D23-41BC-B28F-1A8B8BD0751E}
+		{EFC1C8E0-4F09-4820-A82F-8D77FB0FDBA0} = {0B033572-B063-4B59-B9BD-FBC53BFD763E}
+		{35C7CE93-5E6A-4F30-A6DF-095869008CCC} = {89CE3CEC-4921-464D-A1EB-D90E929BFD4E}
+		{B9976EC0-7478-4822-B8EC-73392AB5DF46} = {3EB6C372-EDB6-4143-8C51-E7A90637395E}
+		{91A55373-A1D8-4207-92EB-EB5713F1D6BD} = {462F87EF-4FDB-4A65-A2A9-F311C491644E}
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{869886F8-D8C2-401C-9283-0C8698471103}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{869886F8-D8C2-401C-9283-0C8698471103}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{869886F8-D8C2-401C-9283-0C8698471103}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{869886F8-D8C2-401C-9283-0C8698471103}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EFC1C8E0-4F09-4820-A82F-8D77FB0FDBA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EFC1C8E0-4F09-4820-A82F-8D77FB0FDBA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EFC1C8E0-4F09-4820-A82F-8D77FB0FDBA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EFC1C8E0-4F09-4820-A82F-8D77FB0FDBA0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35C7CE93-5E6A-4F30-A6DF-095869008CCC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35C7CE93-5E6A-4F30-A6DF-095869008CCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35C7CE93-5E6A-4F30-A6DF-095869008CCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35C7CE93-5E6A-4F30-A6DF-095869008CCC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B9976EC0-7478-4822-B8EC-73392AB5DF46}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9976EC0-7478-4822-B8EC-73392AB5DF46}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9976EC0-7478-4822-B8EC-73392AB5DF46}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9976EC0-7478-4822-B8EC-73392AB5DF46}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91A55373-A1D8-4207-92EB-EB5713F1D6BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91A55373-A1D8-4207-92EB-EB5713F1D6BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91A55373-A1D8-4207-92EB-EB5713F1D6BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91A55373-A1D8-4207-92EB-EB5713F1D6BD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
