@@ -1,4 +1,6 @@
+using Application.Abstractions.Interfaces;
 using Infrastructure.Persistance;
+using Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,6 +14,8 @@ public static class ConfigureServices
         services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlite("DataSource=playground.db"));
 
+        services.AddScoped<IPersonRepository, PersonRepository>();
+        
         return services;
     }
 }
