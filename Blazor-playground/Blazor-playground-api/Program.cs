@@ -1,6 +1,9 @@
 using Application;
+using Application.Abstractions.Interfaces;
 using Domain;
+using Domain.Entities;
 using Infrastructure;
+using Microsoft.AspNetCore.Http.HttpResults;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,29 +27,27 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-var summaries = new[]
-{
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
 
-app.MapGet("/weatherforecast", () =>
-    {
-        var forecast = Enumerable.Range(1, 5).Select(index =>
-                new WeatherForecast
-                (
-                    DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-                    Random.Shared.Next(-20, 55),
-                    summaries[Random.Shared.Next(summaries.Length)]
-                ))
-            .ToArray();
-        return forecast;
-    })
-    .WithName("GetWeatherForecast")
-    .WithOpenApi();
+app.MapPost("/person", async (Person person, IPersonRepository personRepository) =>
+{
+    if (person is not null)
+        await personRepository.Add(person);
+
+    return Results.Created($"/person/{person!.Id}", person);
+});
+
+app.MapGet("/person/{id}:int", async (int id, IPersonRepository personRepository) =>
+{
+    var person = await personRepository.GetById(id);
+
+    return person is not null ? Results.Ok(person) : Results.NotFound();
+});
+
+app.MapGet("/persons", async (IPersonRepository personRepository) =>
+{
+    var personList = await personRepository.GetAll();
+
+    return personList is not null ? Results.Ok(personList) : Results.NotFound();
+});
 
 app.Run();
-
-record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}
