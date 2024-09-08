@@ -1,0 +1,22 @@
+@page "/Person/{Id:int}"
+
+@if (_isLoading)
+{
+    <MudText Typo="Typo.h1">Laddar...</MudText>
+}
+else if(_loadFailed is not null) 
+{
+    <MudText Typo="Typo.subtitle2" Align="Align.Center">Någonting gick fel vid hämtning av data, vad god försök igen.</MudText>
+}
+else
+{
+    <MudGrid>
+        <MudItem sm="6">
+            <MudText Typo="Typo.h5">@_person.FirstName</MudText>
+            <MudText Typo="Typo.h5">@_person.LastName</MudText>
+        </MudItem>
+        <MudItem sm="6">
+            <MudText Typo="Typo.h5">@_person.JobTitle</MudText>
+        </MudItem>
+    </MudGrid>
+}

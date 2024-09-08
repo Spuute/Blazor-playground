@@ -1,0 +1,26 @@
+@page "/persons"
+<PageTitle>Personsök</PageTitle>
+
+
+<MudPaper Class="pa-4 my-2">
+    <MudGrid>
+        <MudItem sm="12" Class="d-flex justify-space-between align-items-center">
+            <MudText Typo="Typo.h4">Personer</MudText>
+            <MudTextField @bind-Value="Search" Class="w-25" Label="Search" Variant="Variant.Outlined" FullWidth="false" Adornment="Adornment.End" AdornmentIcon="@Icons.Material.Filled.Search" AdornmentColor="Color.Secondary"/>
+        </MudItem>
+        <MudItem sm="12">
+            <MudTable T="DTO.Person" Items="@_persons" Hover="true" Breakpoint="Breakpoint.Sm" LoadingProgressColor="Color.Info" OnRowClick="GoTo">
+                <HeaderContent>
+                    <MudTh>First name</MudTh>
+                    <MudTh>Last name</MudTh>
+                    <MudTh>Position</MudTh>
+                </HeaderContent>
+                <RowTemplate>
+                        <MudTd DataLabel="First name">@context.FirstName</MudTd>
+                        <MudTd DataLabel="Last name">@context.LastName</MudTd>
+                        <MudTd DataLabel="Position">@context.JobTitle</MudTd>
+                </RowTemplate>
+            </MudTable>
+        </MudItem>
+    </MudGrid>
+</MudPaper>

@@ -18,7 +18,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastru
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blazor-playground-api", "Blazor-playground-api\Blazor-playground-api.csproj", "{B9976EC0-7478-4822-B8EC-73392AB5DF46}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blazor-playground-web", "Blazor-playground-web\Blazor-playground-web.csproj", "{91A55373-A1D8-4207-92EB-EB5713F1D6BD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorPlaygroundWeb", "BlazorPlaygroundWeb\BlazorPlaygroundWeb.csproj", "{91A55373-A1D8-4207-92EB-EB5713F1D6BD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

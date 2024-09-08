@@ -7,8 +7,6 @@ using Microsoft.AspNetCore.Http.HttpResults;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services
@@ -16,9 +14,19 @@ builder.Services
     .AddApplication()
     .AddInfrastructure(builder.Configuration);
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", builder =>
+    {
+        builder.AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader();
+    });
+});
+
+
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -26,24 +34,24 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseCors("AllowAll");
 
-
-app.MapPost("/person", async (Person person, IPersonRepository personRepository) =>
+app.MapPost("/api/person", async (Person person, IPersonRepository personRepository) =>
 {
     if (person is not null)
         await personRepository.Add(person);
 
-    return Results.Created($"/person/{person!.Id}", person);
+    return Results.Created($"/api/person/{person!.Id}", person);
 });
 
-app.MapGet("/person/{id}:int", async (int id, IPersonRepository personRepository) =>
+app.MapGet("/api/person/{id:int}", async (int id, IPersonRepository personRepository) =>
 {
     var person = await personRepository.GetById(id);
 
     return person is not null ? Results.Ok(person) : Results.NotFound();
 });
 
-app.MapGet("/persons", async (IPersonRepository personRepository) =>
+app.MapGet("/api/persons", async (IPersonRepository personRepository) =>
 {
     var personList = await personRepository.GetAll();
 
