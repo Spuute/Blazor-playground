@@ -1,4 +1,5 @@
 @page "/Person/{Id:int}"
+@using BlazorPlaygroundWeb.Components.Person
 
 @if (_isLoading)
 {
@@ -8,15 +9,21 @@ else if(_loadFailed is not null)
 {
     <MudText Typo="Typo.subtitle2" Align="Align.Center">Någonting gick fel vid hämtning av data, vad god försök igen.</MudText>
 }
-else
+else if(_person is not null)
 {
+    <CascadingValue Value="ReFetchDataCallback">
+        
     <MudGrid>
         <MudItem sm="6">
-            <MudText Typo="Typo.h5">@_person.FirstName</MudText>
-            <MudText Typo="Typo.h5">@_person.LastName</MudText>
+            <PersonInformationCard FirstName="@_person.FirstName" LastName="@_person.LastName" JobTitle="@_person.JobTitle" />
         </MudItem>
         <MudItem sm="6">
-            <MudText Typo="Typo.h5">@_person.JobTitle</MudText>
+          
         </MudItem>
     </MudGrid>
+    </CascadingValue>
+}
+else
+{
+    <p>aklsflasdf</p>
 }
