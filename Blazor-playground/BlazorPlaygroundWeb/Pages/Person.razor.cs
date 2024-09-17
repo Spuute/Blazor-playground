@@ -8,11 +8,16 @@ public partial class Person
     [Inject] private IHttpClientService HttpClientService { get; set; }
     [Parameter] public int Id { get; set; }
 
-    private DTO.Person? _person;
+    private static DTO.Person? _person;
     private bool _isLoading = true;
     private Exception? _loadFailed;
     
-    protected override async Task OnParametersSetAsync()
+    // protected override async Task OnParametersSetAsync()
+    // {
+    //     await FetchPersonById();
+    // }
+
+    protected override async Task OnInitializedAsync()
     {
         await FetchPersonById();
     }
@@ -21,7 +26,7 @@ public partial class Person
     {
         try
         {
-            _person = null;
+            // _person = null;
             _isLoading = true;
             _person = await HttpClientService.Get<DTO.Person>($"/api/person/{Id}");
         }
