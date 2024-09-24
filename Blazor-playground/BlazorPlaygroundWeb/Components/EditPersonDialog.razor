@@ -1,0 +1,32 @@
+@using BlazorPlaygroundWeb.Services
+@inherits MudDialog
+
+<EditForm Model="@PersonObject">
+    <MudDialogContent>
+        <MudTextField @bind-Value="PersonObject!.FirstName" Label="First Name" Variant="Variant.Outlined"></MudTextField>
+        <MudTextField @bind-Value="PersonObject!.LastName" Label="Last Name" Variant="Variant.Outlined"></MudTextField>
+        <MudTextField @bind-Value="PersonObject!.JobTitle" Label="Job title" Variant="Variant.Outlined"></MudTextField>
+    </MudDialogContent>
+    <MudDialogActions>
+        <MudButton OnClick="Save" Color="Color.Primary">Save</MudButton>
+        <MudButton OnClick="Cancel" Color="Color.Secondary">Cancel</MudButton>
+    </MudDialogActions>
+</EditForm>
+
+@code {
+    [Inject] IHttpClientService _httpClientService { get; set; }
+    [CascadingParameter] public MudDialogInstance MudDialog { get; set; }
+    [Parameter] public DTO.Person? PersonObject { get; set; } 
+    
+    
+    private async Task Save()
+    {
+        await _httpClientService.Put<DTO.Person, DTO.Person>("api/persons", PersonObject);
+        MudDialog.Close(DialogResult.Ok(PersonObject)); // Close dialog and return result
+    }
+
+    private void Cancel()
+    {
+        MudDialog.Cancel(); // Close dialog without saving
+    }
+}

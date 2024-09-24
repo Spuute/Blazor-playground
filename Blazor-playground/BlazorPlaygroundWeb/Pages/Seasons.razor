@@ -1,0 +1,19 @@
+@page "/seasons"
+@using BlazorPlaygroundWeb.Components
+@using BlazorPlaygroundWeb.Enums
+<h3>Seasons</h3>
+
+<EnumSelect TEnum="Enums.Seasons" @bind-SelectedEnum="_selectedSeason" />
+<br/>
+Vald årstid är: @_selectedSeason;
+<br/>
+<EnumSelect TEnum="Enums.Categories" @bind-SelectedEnum="_selectedCategory" />
+<br/>
+Vald kategori är: @_selectedCategory; 
+
+
+
+@code {
+    private Enums.Seasons _selectedSeason = Enums.Seasons.Autumn;
+    private Enums.Categories _selectedCategory = Categories.Appetizer;
+}

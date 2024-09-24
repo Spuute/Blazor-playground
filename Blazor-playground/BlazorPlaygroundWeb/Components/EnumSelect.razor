@@ -1,0 +1,48 @@
+@typeparam TEnum
+
+<label for="test"></label>
+<select class="form-select" id="test" @onchange="OnSelectChanged">
+    <option selected>-- Select a value --</option>
+    @foreach (var enumValue in Enum.GetValues(typeof(TEnum)).Cast<TEnum>().Where(e => !e.Equals(default(TEnum))))
+    {
+        <option value="@enumValue">@GetTranslation(enumValue)</option>
+    }
+</select>
+
+@code {
+    [Parameter] public TEnum? SelectedEnum { get; set; }
+    [Parameter] public EventCallback<TEnum> SelectedEnumChanged { get; set; }
+
+    private async Task OnSelectChanged(ChangeEventArgs e)
+    {
+        if (Enum.TryParse(typeof(TEnum), e.Value.ToString(), out var selectedValue))
+        {
+            SelectedEnum = (TEnum?)selectedValue;
+            await SelectedEnumChanged.InvokeAsync(SelectedEnum);
+        }
+    }
+
+    private static readonly Dictionary<Enums.Seasons, string> SeasonTranslations = new()
+    {
+        { Enums.Seasons.Summer, "Vår" },
+        { Enums.Seasons.Spring, "Sommar" },
+        { Enums.Seasons.Autumn, "Höst" },
+        { Enums.Seasons.Winter, "Vinter" }
+    };
+
+    private static readonly Dictionary<Enums.Categories, string> CategoriesTranslations = new()
+    {
+        { Enums.Categories.MainCourse, "Huvudrätt" },
+        { Enums.Categories.Appetizer, "Förrätt" },
+        { Enums.Categories.Dessert, "Efterätt" },
+    };
+
+    private string GetTranslation(TEnum enumValue)
+    {
+        return enumValue switch
+        {
+            Enums.Seasons season when SeasonTranslations.TryGetValue(season, out var translation) => translation,
+            Enums.Categories category when CategoriesTranslations.TryGetValue(category, out var translation) => translation,
+        };
+    }
+}

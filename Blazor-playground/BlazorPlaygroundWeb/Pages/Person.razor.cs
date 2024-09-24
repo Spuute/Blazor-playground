@@ -1,5 +1,7 @@
+using BlazorPlaygroundWeb.Components;
 using BlazorPlaygroundWeb.Services;
 using Microsoft.AspNetCore.Components;
+using MudBlazor;
 
 namespace BlazorPlaygroundWeb.Pages;
 
@@ -12,11 +14,6 @@ public partial class Person
     private bool _isLoading = true;
     private Exception? _loadFailed;
     
-    // protected override async Task OnParametersSetAsync()
-    // {
-    //     await FetchPersonById();
-    // }
-
     protected override async Task OnInitializedAsync()
     {
         await FetchPersonById();
@@ -40,6 +37,7 @@ public partial class Person
             _isLoading = false;
         }
     }
+    private EventCallback ReFetchDataCallback => EventCallback.Factory.Create(this, RefetchData);
 
     private async Task RefetchData()
     {
@@ -49,5 +47,5 @@ public partial class Person
         StateHasChanged();
     }
 
-    private EventCallback ReFetchDataCallback => EventCallback.Factory.Create(this, RefetchData);
+   
 }

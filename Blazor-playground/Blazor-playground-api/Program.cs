@@ -58,4 +58,11 @@ app.MapGet("/api/persons", async (IPersonRepository personRepository) =>
     return personList is not null ? Results.Ok(personList) : Results.NotFound();
 });
 
+app.MapPut("/api/persons", async (IPersonRepository personRepository, Person updatedPerson) =>
+{
+    
+    var data = await personRepository.Update(updatedPerson);
+    return data;
+});
+
 app.Run();
