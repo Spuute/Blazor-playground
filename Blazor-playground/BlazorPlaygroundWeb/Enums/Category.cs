@@ -1,6 +1,6 @@
 namespace BlazorPlaygroundWeb.Enums;
 
-public enum Categories
+public enum Category
 {
     InvalidState = 0,
     MainCourse = 1,

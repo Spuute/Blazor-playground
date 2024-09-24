@@ -1,6 +1,6 @@
 namespace BlazorPlaygroundWeb.Enums;
 
-public enum Seasons
+public enum Season
 {
     InvalidState = 0,
     Spring = 1,

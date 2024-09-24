@@ -1,59 +1,51 @@
-@* @typeparam TEnum *@
-@* *@
-@* <MudSelect T="Enum" Label="välj förfan" @onchange="OnSelectedChanged"> *@
-@*     $1$ <MudSelectItem Value="0">-- Välj någonting ur listan --</MudSelectItem> #1# *@
-@*     @foreach (var enumValue in EnumList) *@
-@*     { *@
-@*         <MudSelectItem Value="enumValue">@GetTranslation(enumValue)</MudSelectItem>         *@
-@*     } *@
-@* </MudSelect> *@
-@* *@
-@* @code { *@
-@* *@
-@*     [Parameter] public TEnum? SelectedEnum { get; set; } *@
-@*     [Parameter] public EventCallback<TEnum> SelectedEnumChanged { get; set; } *@
-@*     [Parameter] public required IEnumerable<TEnum> EnumList { get; set; } *@
-@* *@
-@*     protected override async Task OnParametersSetAsync() *@
-@*     { *@
-@*         if (EnumList.Any()) *@
-@*         { *@
-@*             EnumList = EnumList.Where(e => !e.Equals(default(TEnum))); *@
-@*         } *@
-@* *@
-@*         await base.OnParametersSetAsync(); *@
-@*     } *@
-@* *@
-@*     private async Task OnSelectedChanged(ChangeEventArgs e) *@
-@*     { *@
-@*         if (Enum.TryParse(typeof(TEnum), e.Value.ToString(), out var selectedValue)) *@
-@*         { *@
-@*             SelectedEnum = (TEnum?)selectedValue; *@
-@*             await SelectedEnumChanged.InvokeAsync(SelectedEnum); *@
-@*         } *@
-@*     } *@
-@* *@
-@*     private static readonly Dictionary<Enums.Seasons, string> SeasonTranslations = new() *@
-@*     { *@
-@*         { Enums.Seasons.Summer, "Vår" }, *@
-@*         { Enums.Seasons.Spring, "Sommar" }, *@
-@*         { Enums.Seasons.Autumn, "Höst" }, *@
-@*         { Enums.Seasons.Winter, "Vinter" } *@
-@*     }; *@
-@* *@
-@*     private static readonly Dictionary<Enums.Categories, string> CategoriesTranslations = new() *@
-@*     { *@
-@*         { Enums.Categories.MainCourse, "Huvudrätt" }, *@
-@*         { Enums.Categories.Appetizer, "Förrätt" }, *@
-@*         { Enums.Categories.Dessert, "Efterätt" }, *@
-@*     }; *@
-@* *@
-@*     private string GetTranslation(TEnum enumValue) *@
-@*     { *@
-@*         return enumValue switch *@
-@*         { *@
-@*             Enums.Seasons season when SeasonTranslations.TryGetValue(season, out var translation) => translation, *@
-@*             Enums.Categories category when CategoriesTranslations.TryGetValue(category, out var translation) => translation, *@
-@*         }; *@
-@*     } *@
-@* } *@
+@using BlazorPlaygroundWeb.Enums
+@typeparam TEnum
+
+<MudSelect T="TEnum" Label="välj " @onchange="OnSelectedChanged">
+    @foreach (var enumValue in Enum.GetValues(typeof(TEnum)).Cast<TEnum>().Where(e => !e.Equals(default(TEnum))))
+    {
+        <MudSelectItem Value="enumValue">@GetTranslation(enumValue)</MudSelectItem>
+    }
+</MudSelect>
+
+@code {
+    [Parameter] public TEnum? SelectedEnum { get; set; }
+    [Parameter] public EventCallback<TEnum> SelectedEnumChanged { get; set; }
+
+    private async Task OnSelectedChanged(ChangeEventArgs e)
+    {
+        if (Enum.TryParse(typeof(TEnum), e.Value!.ToString(), out var selectedValue))
+        {
+            SelectedEnum = (TEnum?)selectedValue;
+            await SelectedEnumChanged.InvokeAsync(SelectedEnum);
+        }
+    }
+
+    private static string SeasonTranslation(Season? season) =>
+        season switch
+        {
+            Season.Autumn => "Höst",
+            Season.Spring => "Vår",
+            Season.Summer => "Sommar",
+            Season.Winter => "Vinter"
+        };
+
+    private static string CategoryTranslation(Category? category) =>
+        category switch
+        {
+            Category.Appetizer => "Förrätt",
+            Category.Dessert => "Efterätt",
+            Category.MainCourse => "Huvudrätt"
+        };
+
+
+    private string GetTranslation(TEnum enumValue)
+    {
+        return enumValue switch
+        {
+            Season season => SeasonTranslation(season),
+            Category category => CategoryTranslation(category)
+        };
+    }
+
+}
