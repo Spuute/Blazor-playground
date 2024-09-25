@@ -1,5 +1,5 @@
 @using BlazorPlaygroundWeb.Enums
-@typeparam TEnum
+@typeparam TEnum where TEnum : struct, Enum 
 
 <label for="test"></label>
 <select class="form-select" id="test" @onchange="OnSelectChanged">
